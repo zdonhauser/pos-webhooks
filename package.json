@@ -1,0 +1,25 @@
+{
+  "name": "pos-webhooks",
+  "version": "1.0.0",
+  "description": "Shopify webhook microservice for POS transactions",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "tsc",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["shopify", "webhook", "vercel", "serverless"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/postgres": "^0.5.1",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/pg": "^8.10.9",
+    "@vercel/node": "^3.0.17",
+    "typescript": "^5.3.3",
+    "vercel": "^33.0.1"
+  }
+}
