@@ -83,8 +83,7 @@ export default async function handler(
         payment_id = EXCLUDED.payment_id,
         manual_payment_gateway = EXCLUDED.manual_payment_gateway,
         admin_graphql_api_id = EXCLUDED.admin_graphql_api_id,
-        webhook = EXCLUDED.webhook,
-        updated_at = NOW()
+        webhook = EXCLUDED.webhook
       RETURNING *;
     `;
 
