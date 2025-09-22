@@ -8,9 +8,7 @@ if (!connectionString) {
 
 const pool = new Pool({
   connectionString,
-  ssl: process.env.NODE_ENV === 'production' ? {
-    rejectUnauthorized: false
-  } : undefined,
+  // Don't force SSL - let the connection string determine SSL usage
   max: 1, // Vercel free tier has connection limits
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
