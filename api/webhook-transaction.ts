@@ -54,6 +54,17 @@ export default async function handler(
     // Parse transaction data
     const transaction = JSON.parse(body);
 
+    // Log the received transaction data for debugging
+    console.log('Received transaction webhook:', {
+      id: transaction.id,
+      order_id: transaction.order_id,
+      created_at: transaction.created_at,
+      processed_at: transaction.processed_at,
+      amount: transaction.amount,
+      kind: transaction.kind,
+      status: transaction.status
+    });
+
     // Process the transaction here
     // Insert transaction into the database
     const query = `
@@ -94,23 +105,32 @@ export default async function handler(
       transaction.gateway,
       transaction.status,
       transaction.message,
-      new Date(transaction.created_at),
+      transaction.created_at ? new Date(transaction.created_at) : null,
       transaction.test,
       transaction.authorization,
       transaction.location_id,
       transaction.user_id,
       transaction.parent_id,
-      new Date(transaction.processed_at),
+      transaction.processed_at ? new Date(transaction.processed_at) : null,
       transaction.device_id,
       transaction.error_code,
       transaction.source_name,
-      parseFloat(transaction.amount),
+      transaction.amount ? parseFloat(transaction.amount) : null,
       transaction.currency,
       transaction.payment_id,
       transaction.manual_payment_gateway,
       transaction.admin_graphql_api_id,
       transaction,
     ];
+
+    // Log the values array for debugging
+    console.log('Database insert values:', {
+      id: values[0],
+      order_id: values[1],
+      created_at: values[6],
+      processed_at: values[12],
+      amount: values[16]
+    });
 
     const result = await queryDB(query, values);
     console.log('Transaction inserted:', result.rows[0]);
